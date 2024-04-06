@@ -1,6 +1,7 @@
 export class GerenciadorContato {
   constructor() {
     this.listaContatos = [];
+    this.searchStrategy = null;
   }
 
   setListaContatos(contato) {
@@ -10,6 +11,10 @@ export class GerenciadorContato {
     } else {
       console.log("Erro: Formato de contato invalido");
     }
+  }
+
+  setSearchStrategy(strategy) {
+    this.searchStrategy = strategy;
   }
 
   getListaContatos() {
@@ -27,14 +32,17 @@ export class GerenciadorContato {
     }
   }
 
-  searchFromListaContatos(nome) {
-    if (nome) {
-      console.log(
-        "Contato encontrado: \n",
-        this.listaContatos.find((contato) => contato.nome === nome)
-      );
+  searchFromListaContatos(criteria) {
+    if (this.searchStrategy) {
+      const results = this.searchStrategy.search(this.listaContatos, criteria);
+      if (results && results.length > 0) {
+        console.log("Contatos encontrados:");
+        results.forEach((contato) => console.log(contato));
+      } else {
+        console.log("Nenhum contato encontrado com o criterio fornecido.");
+      }
     } else {
-      console.log("Erro: Formato de nome invalido");
+      console.log("Busca ainda nao definida defina o tipo de busca.");
     }
   }
 }

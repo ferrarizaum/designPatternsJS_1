@@ -1,3 +1,8 @@
+import {
+  SearchByEmail,
+  SearchByName,
+  SearchByTelefone,
+} from "./controllers/searchStrategy.mjs";
 import { FacadeContato } from "./facadeContato.mjs";
 import readline from "readline";
 
@@ -26,10 +31,38 @@ function removerContato() {
 }
 
 function procuraContato() {
-  rl.question("Digite o nome do contato a ser procurado: ", (nome) => {
-    facadeContato.getContatoFromListaContatos(nome);
-    menu();
-  });
+  if (facadeContato.gerenciadorContatos.searchStrategy) {
+    rl.question("Digite o parametro a ser procurado: ", (nome) => {
+      facadeContato.getContatoFromListaContatos(nome);
+      menu();
+    });
+  } else {
+    rl.question(
+      "Deseja procurar por qual campo ? 1-Nome, 2-Email, 3-Telefone",
+      (option) => {
+        switch (option) {
+          case "1":
+            facadeContato.gerenciadorContatos.setSearchStrategy(
+              new SearchByName()
+            );
+            procuraContato();
+            break;
+          case "2":
+            facadeContato.gerenciadorContatos.setSearchStrategy(
+              new SearchByEmail()
+            );
+            procuraContato();
+            break;
+          case "3":
+            facadeContato.gerenciadorContatos.setSearchStrategy(
+              new SearchByTelefone()
+            );
+            procuraContato();
+            break;
+        }
+      }
+    );
+  }
 }
 
 function getListaContatos() {
