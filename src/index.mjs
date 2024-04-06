@@ -1,26 +1,12 @@
-import { Contato } from "./controllers/contato.mjs";
-import { GerenciadorContato } from "./controllers/gerenciadorContatos.mjs";
+import { FacadeContato } from "./facadeContato.mjs";
 
-const testaContato = new Contato();
-const testaContato2 = new Contato();
+const facadeContato = new FacadeContato();
 
-testaContato.setNome("Jose Ferrari");
-testaContato.setEmail("joseferrari@email.com");
-testaContato.setTelefone("43991250895");
-
-testaContato2.setNome("teste");
-testaContato2.setEmail("teste@email.com");
-testaContato2.setTelefone("12345678");
-
-const testaListaContatos = new GerenciadorContato();
-
-testaListaContatos.setListaContatos(testaContato);
-testaListaContatos.setListaContatos(testaContato2);
-
-console.log(testaContato.getNome());
-console.log(testaContato.getEmail());
-console.log(testaContato.getTelefone());
-
-console.log("\n");
-
-console.log(testaListaContatos.getListaContatos());
+facadeContato.setListaContatos("jose", "jose@email.com", "12345678");
+facadeContato.setListaContatos("maria", "maria@email.com", "12345678");
+facadeContato.setListaContatos("joao", "joao@email.com", "12345678");
+facadeContato.getListaContatos();
+facadeContato.removeContatoFromListaContatos("joao");
+facadeContato.getListaContatos();
+//facadeContato.getContatoFromListaContatos("jose");
+//facadeContato.getListaContatos();
