@@ -2,8 +2,8 @@ import {
   SearchByEmail,
   SearchByName,
   SearchByTelefone,
-} from "./controllers/searchStrategy.mjs";
-import { FacadeContato } from "./facadeContato.mjs";
+} from "./strategies/searchStrategy.mjs";
+import { FacadeContato } from "./controllers/facadeContato.mjs";
 import readline from "readline";
 
 const facadeContato = new FacadeContato();

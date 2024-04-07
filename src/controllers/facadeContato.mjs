@@ -1,5 +1,5 @@
-import { Contato } from "./controllers/contato.mjs";
-import { GerenciadorContato } from "./controllers/gerenciadorContatos.mjs";
+import { Contato } from "../models/contato.mjs";
+import { GerenciadorContato } from "./gerenciadorContatos.mjs";
 
 export class FacadeContato {
   constructor() {
